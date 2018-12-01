@@ -19,9 +19,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4389381925363378}
-  - component: {fileID: 114788667666912276}
+  - component: {fileID: 114513232155491024}
   m_Layer: 0
-  m_Name: Short Sword
+  m_Name: Silence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114788667666912276
+--- !u!114 &114513232155491024
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1291006353801380}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7499d6561c07b3746bf18a1b800212b3, type: 3}
+  m_Script: {fileID: 11500000, guid: 79b05af1b28ce954f838460f80963eb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemBase: {fileID: 11400000, guid: 20563d347d55092418e6fff1050e5342, type: 2}
+  itemBase: {fileID: 11400000, guid: bdf8c9d18eb0b314eb5378eaefd3ea53, type: 2}
