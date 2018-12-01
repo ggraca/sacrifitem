@@ -53,7 +53,7 @@ public class Inventory : MonoBehaviour {
     }
 
 
-    private void Start()
+    /*private void Start()
     {
         foreach(var x in GameObject.FindObjectOfType<CentralItemManager>().ItemData)
         {
@@ -61,7 +61,7 @@ public class Inventory : MonoBehaviour {
         }
 
         SetGUI("Background");
-    }
+    }*/
 
 
     /// <summary>
@@ -220,7 +220,7 @@ public class Inventory : MonoBehaviour {
                 initialX += 100;
 
                 count++;
-                if (count % 5 == 0)
+                if (count % 6 == 0)
                 {
                     initialX = -250;
                     initialY -= 100;
