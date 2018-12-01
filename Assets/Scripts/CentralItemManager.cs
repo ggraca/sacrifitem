@@ -40,4 +40,9 @@ public class CentralItemManager : MonoBehaviour {
 		}
 	}
 
+    public ItemBase getRandomItem() {
+        int index = Random.Range(0, itemData.Count);
+        return ItemData[index].GetComponent<IGameItem>().GetItemBase();
+    }
+
 }
