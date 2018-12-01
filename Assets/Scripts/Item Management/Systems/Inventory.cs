@@ -196,9 +196,14 @@ public class Inventory : MonoBehaviour {
     /// and each entry is attached the specialized item script to be able to
     /// keep track of the selected items easily later on.
     /// </summary>
-    public void SetGUI(string parent)
+    public void SetGUI(string parent = "Background")
     {
         var p = GameObject.Find(parent).gameObject;
+        
+        for(int i = 0; i < p.transform.childCount; i ++)
+        {
+            Destroy(p.transform.GetChild(i).gameObject);
+        }
 
         float initialX = -250;
         float initialY = 100;
