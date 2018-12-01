@@ -9,11 +9,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc30c60744401124cb3856399657b634, type: 3}
-  m_Name: Short Sword
+  m_Name: Cleanse
   m_EditorClassIdentifier: 
-  Name: Short Sword
-  Description: Deals 3 damage to the opponent
+  Name: Cleanse
+  Description: Remove 1 debuff from yourself
   ItemWeight: 0
-  ItemValue: 20
-  MainType: 0
-  ItemIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  ItemValue: 1
+  MainType: 1
+  ItemIcon: {fileID: 21300000, guid: 1ca2a167dd3e15342a82a6d9ca55cf2b, type: 3}

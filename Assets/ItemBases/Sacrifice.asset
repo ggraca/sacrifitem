@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc30c60744401124cb3856399657b634, type: 3}
+  m_Name: Sacrifice
+  m_EditorClassIdentifier: 
+  Name: Sacrifice
+  Description: The opponent has to sacrifice 1 extra item
+  ItemWeight: 0
+  ItemValue: 1
+  MainType: 2
+  ItemIcon: {fileID: 21300000, guid: 9214533baf35bdb428fb8ab57665cf8d, type: 3}
