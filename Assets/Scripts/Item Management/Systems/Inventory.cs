@@ -227,14 +227,8 @@ public class Inventory : MonoBehaviour {
                     count = 0;
                 }
 
-
-                switch (x.item.MainType)
-                {
-                    case ItemBase.MainItemType.Weapon: itemEntry.AddComponent<Weapon>(); break;
-                    case ItemBase.MainItemType.Spell: itemEntry.AddComponent<Spell>(); break;
-                    case ItemBase.MainItemType.Potion: itemEntry.AddComponent<Potion>(); break;
-                }
-
+                ItemBase.SetObjectDetails(itemEntry,x.item);
+               
                 var gi = itemEntry.GetComponent<IGameItem>();
 
                 gi.SetItemBase(x.item);

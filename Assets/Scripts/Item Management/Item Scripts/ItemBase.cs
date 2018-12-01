@@ -52,6 +52,7 @@ public class ItemBase: ScriptableObject
     public string Description;
     public int ItemWeight;
     public int ItemValue;
+    public string AnimationTrigger;
 
     public MainItemType MainType;
     // public SecondaryItemType SecondaryType;
@@ -81,53 +82,50 @@ public class ItemBase: ScriptableObject
     /// </summary>
     /// <param name="newEntry"></param>
     /// <param name="itemDetails"></param>
-    // public static void SetObjectDetails(GameObject newEntry, IGameItem itemDetails)
-    // {
-    //     if (itemDetails.GetItemBase().MainType.Equals(ItemBase.MainItemType.Consumable))
-    //     {
-    //         //Set the script details
-    //         newEntry.AddComponent<Consumable>().SetItemBase(itemDetails.GetItemBase());
-    //         newEntry.GetComponent<Consumable>().SetRequiredComponents(itemDetails.GetRequiredComponents());
-    //     }
-    //     else if (itemDetails.GetItemBase().MainType.Equals(ItemBase.MainItemType.CraftableItem))
-    //     {
-    //         //Set the script details
-    //         newEntry.AddComponent<CraftableItem>().SetItemBase(itemDetails.GetItemBase());
-    //         newEntry.GetComponent<CraftableItem>().SetRequiredComponents(itemDetails.GetRequiredComponents());
-    //     }
-    //     else if (itemDetails.GetItemBase().MainType.Equals(ItemBase.MainItemType.CraftingComponent))
-    //     {
-    //         //Set the script details
-    //         newEntry.AddComponent<CraftingComponent>().SetItemBase(itemDetails.GetItemBase());
-    //         newEntry.GetComponent<CraftingComponent>().SetRequiredComponents(itemDetails.GetRequiredComponents());
-    //     }
-    // }
-
+     public static void SetObjectDetails(GameObject newEntry, IGameItem itemDetails)
+     {
+         if (itemDetails.GetItemBase().MainType.Equals(ItemBase.MainItemType.Weapon))
+         {
+             //Set the script details
+             newEntry.AddComponent<Weapon>().SetItemBase(itemDetails.GetItemBase());
+         }
+         else if (itemDetails.GetItemBase().MainType.Equals(ItemBase.MainItemType.Potion))
+         {
+             //Set the script details
+             newEntry.AddComponent<Potion>().SetItemBase(itemDetails.GetItemBase());
+         }
+         else if (itemDetails.GetItemBase().MainType.Equals(ItemBase.MainItemType.Spell))
+         {
+             //Set the script details
+             newEntry.AddComponent<Spell>().SetItemBase(itemDetails.GetItemBase());
+         }
+     }
+     
     /// <summary>
     /// Given the item details, regarding game object will be attached the script type of
     /// detailed item type, and the content of the given item details will be copied to the new component.
     /// </summary>
     /// <param name="newEntry"></param>
     /// <param name="itemDetails"></param>
-    // public static void SetObjectDetails(GameObject newEntry, ItemBase itemDetails)
-    // {
-    //     if (itemDetails.MainType.Equals(ItemBase.MainItemType.Consumable))
-    //     {
-    //         //Set the script details
-    //         newEntry.AddComponent<Consumable>().SetItemBase(itemDetails);
+     public static void SetObjectDetails(GameObject newEntry, ItemBase itemDetails)
+     {
+         if (itemDetails.MainType.Equals(ItemBase.MainItemType.Weapon))
+         {
+             //Set the script details
+             newEntry.AddComponent<Weapon>().SetItemBase(itemDetails);
 
-    //     }
-    //     else if (itemDetails.MainType.Equals(ItemBase.MainItemType.CraftableItem))
-    //     {
-    //         //Set the script details
-    //         newEntry.AddComponent<CraftableItem>().SetItemBase(itemDetails);
-    //     }
-    //     else if (itemDetails.MainType.Equals(ItemBase.MainItemType.CraftingComponent))
-    //     {
-    //         //Set the script details
-    //         newEntry.AddComponent<CraftingComponent>().SetItemBase(itemDetails);
-    //     }
-    // }
+         }
+         else if (itemDetails.MainType.Equals(ItemBase.MainItemType.Spell))
+         {
+             //Set the script details
+             newEntry.AddComponent<Spell>().SetItemBase(itemDetails);
+         }
+         else if (itemDetails.MainType.Equals(ItemBase.MainItemType.Potion))
+         {
+             //Set the script details
+             newEntry.AddComponent<Potion>().SetItemBase(itemDetails);
+         }
+     }
 
     /// <summary>
     /// Given the item details, regarding game object will be attached the script type of
@@ -135,24 +133,24 @@ public class ItemBase: ScriptableObject
     /// </summary>
     /// <param name="newEntry"></param>
     /// <param name="itemDetails"></param>
-    // public static void SetObjectItemBases(GameObject newEntry, IGameItem itemDetails)
-    // {
-    //     if (itemDetails.GetItemBase().MainType.Equals(ItemBase.MainItemType.Consumable))
-    //     {
-    //         //Set the script details
-    //         newEntry.AddComponent<Consumable>().SetItemBase(itemDetails.GetItemBase());
-    //     }
-    //     else if (itemDetails.GetItemBase().MainType.Equals(ItemBase.MainItemType.CraftableItem))
-    //     {
-    //         //Set the script details
-    //         newEntry.AddComponent<CraftableItem>().SetItemBase(itemDetails.GetItemBase());
-    //     }
-    //     else if (itemDetails.GetItemBase().MainType.Equals(ItemBase.MainItemType.CraftingComponent))
-    //     {
-    //         //Set the script details
-    //         newEntry.AddComponent<CraftingComponent>().SetItemBase(itemDetails.GetItemBase());
-    //     }
-    // }
+     public static void SetObjectItemBases(GameObject newEntry, IGameItem itemDetails)
+     {
+         if (itemDetails.GetItemBase().MainType.Equals(ItemBase.MainItemType.Weapon))
+         {
+             //Set the script details
+             newEntry.AddComponent<Weapon>().SetItemBase(itemDetails.GetItemBase());
+         }
+         else if (itemDetails.GetItemBase().MainType.Equals(ItemBase.MainItemType.Potion))
+         {
+             //Set the script details
+             newEntry.AddComponent<Potion>().SetItemBase(itemDetails.GetItemBase());
+         }
+         else if (itemDetails.GetItemBase().MainType.Equals(ItemBase.MainItemType.Spell))
+         {
+             //Set the script details
+             newEntry.AddComponent<Spell>().SetItemBase(itemDetails.GetItemBase());
+         }
+     }
 }
 
 /// <summary>
@@ -162,8 +160,6 @@ public interface IGameItem
 {
     void SetItemBase(ItemBase baseForItem);
     ItemBase GetItemBase();
-    // List<ItemBase.CraftingComponentRequirement> GetRequiredComponents();
-    // void SetRequiredComponents(List<ItemBase.CraftingComponentRequirement> components);
     void UseItem();
     
 }
