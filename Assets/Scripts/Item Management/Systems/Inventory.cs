@@ -115,7 +115,7 @@ public class Inventory : MonoBehaviour {
         //There is not that much of this item.
         if (itemCount < count) { return false; }
 
-        if (itemCount > count + 1)
+        if (itemCount >= count + 1)
         {
             DecrementItemCount(newItem,count);
         }

@@ -161,11 +161,11 @@ public class Spell : MonoBehaviour,IGameItem {
 
         if(opponentPlayerStatus.IsShieldBlocking()) { return;}
 
-
         if(currentPlayerStatus.IsPowerUp)
         {
             for(int i =0; i < GetComponent<IGameItem>().GetItemBase().ItemValue + 1 ; i ++)
             {
+                if(opponentPlayerInventory.ItemList.Count == 0 ){return;}
                 var rn = Random.Range(0,opponentPlayerInventory.ItemList.Count);
                 var item = opponentPlayerInventory.ItemList[rn].item;
 
@@ -177,6 +177,7 @@ public class Spell : MonoBehaviour,IGameItem {
 
        for(int i =0; i < GetComponent<IGameItem>().GetItemBase().ItemValue ; i ++)
         {
+            if(opponentPlayerInventory.ItemList.Count == 0 ){return;}
             var rn = Random.Range(0,opponentPlayerInventory.ItemList.Count);
             var item = opponentPlayerInventory.ItemList[rn].item;
 

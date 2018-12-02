@@ -195,6 +195,32 @@ public class PlayerStatus : MonoBehaviour
             isShielded = value;
         }
     }
+
+    public List<BuffTypes> PlayerBuffs
+    {
+        get
+        {
+            return playerBuffs;
+        }
+
+        set
+        {
+            playerBuffs = value;
+        }
+    }
+
+    public List<DebuffTypes> PlayerDebuffs1
+    {
+        get
+        {
+            return playerDebuffs;
+        }
+
+        set
+        {
+            playerDebuffs = value;
+        }
+    }
     #endregion
 
 
@@ -243,6 +269,8 @@ public class PlayerStatus : MonoBehaviour
 	public void EnablePowerUp()
 	{
 		isPowerUp = true;
+	
+		if(!IsBuffActive(BuffTypes.PowerUp)){playerBuffs.Add(BuffTypes.PowerUp);}
 	}
 
 	public void DisablePowerUp()
@@ -264,6 +292,7 @@ public class PlayerStatus : MonoBehaviour
 	public void EnableShield()
 	{
 		isShielded = true;
+		if(!IsBuffActive(BuffTypes.Shield)){playerBuffs.Add(BuffTypes.Shield);}
 	}
 
 	public bool IsShieldBlocking()
@@ -311,6 +340,12 @@ public class PlayerStatus : MonoBehaviour
 	private bool IsDebuffActive(DebuffTypes debuff)
 	{
 		foreach(var x in playerDebuffs){if(x.Equals(debuff)){return true;}}
+		return false;
+	}
+
+	private bool IsBuffActive(BuffTypes buff)
+	{
+		foreach(var x in playerBuffs){if(x.Equals(buff)){return true;}}
 		return false;
 	}
 
