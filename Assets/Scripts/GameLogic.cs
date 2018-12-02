@@ -25,6 +25,10 @@ public class GameLogic : MonoBehaviour {
 	[SerializeField]
 	private GameObject InventoryGUIChild;
 
+	private GameObject[] disableSacrifices = new GameObject[2];
+
+	private bool sacrificed = false;
+
 	void Start () {
 		playerStat[0] = player1.GetComponent<PlayerStatus>();
 		playerStat[1] = player2.GetComponent<PlayerStatus>();
@@ -32,6 +36,9 @@ public class GameLogic : MonoBehaviour {
 		playerInv[1] = player2.GetComponent<Inventory>();
 		playerHB[0] = GameObject.Find("HealthBarPlayer1").gameObject.GetComponent<HealthBar>();
 		playerHB[1] = GameObject.Find("HealthBarPlayer2").gameObject.GetComponent<HealthBar>();
+		disableSacrifices[0] = GameObject.Find("DisableSacrificeP1").gameObject;
+		disableSacrifices[1] = GameObject.Find("DisableSacrificeP2").gameObject;
+		disableSacrifices[0].SetActive(false);
 
 		for(int i = 0; i < startingInvSize; i++) {
 			playerInv[0].AddItemToInventory(cim.getRandomItem());
@@ -77,21 +84,30 @@ public class GameLogic : MonoBehaviour {
 		playerHB[currentPlayer].CurrentHealthPlayer = playerStat[currentPlayer].CurrentPlayerHealth;
 		playerHB[opponent].CurrentHealthPlayer = playerStat[opponent].CurrentPlayerHealth;
 
-		ChangeTurnUI();
+		// Change Turn
+
 		int temp = currentPlayer;
 		currentPlayer = opponent;
 		opponent = temp;
+		sacrificed = false;
+		ChangeTurnUI();
 		
 		// TODO: check for win condition
 
 		// Give a new card to the player
 		playerInv[currentPlayer].AddItemToInventory(cim.getRandomItem());
+		if (playerStat[currentPlayer].CurrentPlayerHealth <= 10)
+			playerInv[currentPlayer].AddItemToInventory(cim.getRandomItem());
+
 		playerInv[currentPlayer].SetGUI("BackgroundP" + (currentPlayer + 1).ToString());
 	}
 
 	void ChangeTurnUI() {
 		disabledUI.GetComponent<RectTransform>().anchoredPosition *= new Vector2(-1, 1);
 		selectedUI.GetComponent<RectTransform>().anchoredPosition *= new Vector2(-1, 1);
+
+		disableSacrifices[currentPlayer].SetActive(false);
+		disableSacrifices[opponent].SetActive(true);
 	}
 
 	public PlayerStatus ReceivePlayerStat() {
@@ -143,5 +159,18 @@ public class GameLogic : MonoBehaviour {
 		ClearSlot(slotName);
 		if (slotName == "EquipedSlot") equiped = null;
 		if (slotName == "DiscardedSlot1") discarded = null;
+	}
+
+	public void Sacrifice() {
+		if (sacrificed) return;
+
+		playerStat[currentPlayer].TakeDamage(2);
+		playerInv[currentPlayer].AddItemToInventory(cim.getRandomItem());
+		playerInv[currentPlayer].SetGUI("BackgroundP" + (currentPlayer + 1).ToString());
+		playerHB[currentPlayer].CurrentHealthPlayer = playerStat[currentPlayer].CurrentPlayerHealth;
+
+		disableSacrifices[currentPlayer].SetActive(true);
+		
+		sacrificed = true;
 	}
 }
