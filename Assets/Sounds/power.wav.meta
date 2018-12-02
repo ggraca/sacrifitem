@@ -1,30 +1,21 @@
 fileFormatVersion: 2
-guid: 01c143155024f744dae19839ee8e3d1d
-labels:
-- usfx
-- imphenzia
-- audience
-- spectator
-- spectators
-- arena
-- stereo
-- crowd
-- stomp
-- clap
-- loop
+guid: 3a1936323f2ae1a4092aefa1f3bbee24
 AudioImporter:
+  externalObjects: {}
   serializedVersion: 6
   defaultSettings:
-    loadType: 1
+    loadType: 0
     sampleRateSetting: 0
-    sampleRateOverride: 0
-    compressionFormat: 0
-    quality: 0
+    sampleRateOverride: 44100
+    compressionFormat: 1
+    quality: 1
     conversionMode: 0
   platformSettingOverrides: {}
   forceToMono: 0
+  normalize: 1
   preloadAudioData: 1
   loadInBackground: 0
+  ambisonic: 0
   3D: 1
   userData: 
   assetBundleName: 
