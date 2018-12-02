@@ -32,7 +32,7 @@ public class PlayerStatus : MonoBehaviour
 	public PlayerStatus()
 	{
 		this.maxPlayerHealth = 20;
-		this.currentPlayerHealth = 0;
+		this.currentPlayerHealth = maxPlayerHealth;
 		this.isPoisoned = false;
 		this.poisonValue = 0;
 		this.isDead = false;
@@ -49,7 +49,7 @@ public class PlayerStatus : MonoBehaviour
 	public PlayerStatus(int maxHealth,float shieldBlock)
 	{
 		this.maxPlayerHealth = maxHealth;
-		this.currentPlayerHealth = 0;
+		this.currentPlayerHealth = maxHealth;
 		this.isPoisoned = false;
 		this.poisonValue = 0;
 		this.isDead = false;
@@ -316,6 +316,8 @@ public class PlayerStatus : MonoBehaviour
 
 	public void RandomlyRemoveDebuff()
 	{
+
+		if(playerDebuffs.Count == 0){return;}
 		var rn = Random.Range(0,playerDebuffs.Count);
 
 		switch(playerDebuffs[rn])
@@ -327,8 +329,9 @@ public class PlayerStatus : MonoBehaviour
 
 	public void RandomlyRemoveBuff()
 	{
-		var rn = Random.Range(0,playerBuffs.Count);
+		if(playerBuffs.Count == 0){return;}
 
+		var rn = Random.Range(0,playerBuffs.Count);
 		switch(playerBuffs[rn])
 		{
 			case BuffTypes.PowerUp: DisablePowerUp(); return;

@@ -67,7 +67,7 @@ public class Spell : MonoBehaviour,IGameItem {
             //TODO figure out
         }
 
-       if(opponentPlayerStatus.IsShieldBlocking()) { opponentPlayerStatus.EnableDoubleSacrifice();}
+       if(!opponentPlayerStatus.IsShieldBlocking()) { opponentPlayerStatus.EnableDoubleSacrifice();}
     }
 
     private void ItemShuffle()
@@ -143,7 +143,7 @@ public class Spell : MonoBehaviour,IGameItem {
             return;
         }
 
-        if(opponentPlayerStatus.IsShieldBlocking()) {opponentPlayerStatus.RandomlyRemoveBuff();}
+        if(!opponentPlayerStatus.IsShieldBlocking()) {opponentPlayerStatus.RandomlyRemoveBuff();}
     }
 
     private void Steal()

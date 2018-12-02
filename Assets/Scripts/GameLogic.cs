@@ -11,6 +11,7 @@ public class GameLogic : MonoBehaviour {
 	private GameObject player1, player2;
 	private PlayerStatus[] playerStat = new PlayerStatus[2];
 	private Inventory[] playerInv = new Inventory[2];
+	private HealthBar[] playerHB = new HealthBar[2];
 	private int currentPlayer = 0, opponent = 1;
 
 	private IGameItem equiped, discarded;
@@ -29,6 +30,8 @@ public class GameLogic : MonoBehaviour {
 		playerStat[1] = player2.GetComponent<PlayerStatus>();
 		playerInv[0] = player1.GetComponent<Inventory>();
 		playerInv[1] = player2.GetComponent<Inventory>();
+		playerHB[0] = GameObject.Find("HealthBarPlayer1").gameObject.GetComponent<HealthBar>();
+		playerHB[1] = GameObject.Find("HealthBarPlayer2").gameObject.GetComponent<HealthBar>();
 
 		for(int i = 0; i < startingInvSize; i++) {
 			playerInv[0].AddItemToInventory(cim.getRandomItem());
@@ -70,6 +73,10 @@ public class GameLogic : MonoBehaviour {
 		// TODO: check for win condition
 
 		ClearSlots();
+		playerStat[currentPlayer].UpdatePlayerStatus();
+		playerHB[currentPlayer].CurrentHealthPlayer = playerStat[currentPlayer].CurrentPlayerHealth;
+		playerHB[opponent].CurrentHealthPlayer = playerStat[opponent].CurrentPlayerHealth;
+
 		ChangeTurnUI();
 		int temp = currentPlayer;
 		currentPlayer = opponent;

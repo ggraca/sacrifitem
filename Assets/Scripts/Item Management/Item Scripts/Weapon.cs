@@ -39,10 +39,10 @@ public class Weapon : MonoBehaviour,IGameItem {
 
         if(currentPlayerStatus.IsPowerUp)
         {
-            if(opponentPlayerStatus.IsShieldBlocking()) {opponentPlayerStatus.TakeDamage(GetComponent<IGameItem>().GetItemBase().ItemValue + 1); return;}
+            if(!opponentPlayerStatus.IsShieldBlocking()) {opponentPlayerStatus.TakeDamage(GetComponent<IGameItem>().GetItemBase().ItemValue + 1); return;}
         }
 
-        if(opponentPlayerStatus.IsShieldBlocking()) {opponentPlayerStatus.TakeDamage(GetComponent<IGameItem>().GetItemBase().ItemValue);}
+        if(!opponentPlayerStatus.IsShieldBlocking()) {opponentPlayerStatus.TakeDamage(GetComponent<IGameItem>().GetItemBase().ItemValue);}
     }
 
     private void DamageOverTimePoison()
@@ -53,10 +53,10 @@ public class Weapon : MonoBehaviour,IGameItem {
 
         if(currentPlayerStatus.IsPowerUp)
         {
-            if(opponentPlayerStatus.IsShieldBlocking()) {opponentPlayerStatus.PoisonPlayer(GetComponent<IGameItem>().GetItemBase().ItemValue + 1); return;}
+            if(!opponentPlayerStatus.IsShieldBlocking()) {opponentPlayerStatus.PoisonPlayer(GetComponent<IGameItem>().GetItemBase().ItemValue + 1); return;}
         }
 
-        if(opponentPlayerStatus.IsShieldBlocking()) {opponentPlayerStatus.PoisonPlayer(GetComponent<IGameItem>().GetItemBase().ItemValue); return;}
+        if(!opponentPlayerStatus.IsShieldBlocking()) {opponentPlayerStatus.PoisonPlayer(GetComponent<IGameItem>().GetItemBase().ItemValue); return;}
 
     }
 
