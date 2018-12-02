@@ -146,24 +146,4 @@ public class HealthBar : MonoBehaviour
 	{
 		isDead = true;
 	}
-
-    public void TakeDamage(int damage)
-    {
-        if(currentHealthPlayer - damage <= 0 )
-        {
-            Dead();return;
-        }
-
-        currentHealthPlayer -= damage;
-    }
-
-    public void HealSelf(int healAmount)
-    {
-        if(currentHealthPlayer + healAmount > maxHealthPlayer)
-        {
-            currentHealthPlayer = maxHealthPlayer;return;
-        }
-        currentHealthPlayer += healAmount;
-    }
-
 }

@@ -36,12 +36,30 @@ public class Potion : MonoBehaviour,IGameItem {
 
     private void RemoveDebuff()
     {
+        var gl = GetGameLogic();
+        var currentPlayerStatus = gl.ReceivePlayerStat();
+
+        if(currentPlayerStatus.IsPowerUp)
+        {
+            //TODO find out
+        }
+
+        currentPlayerStatus.RandomlyRemoveDebuff(); return;
+
 
     }
 
     private void Heal()
     {
+        var gl = GetGameLogic();
+        var currentPlayerStatus = gl.ReceivePlayerStat();
 
+        if(currentPlayerStatus.IsPowerUp)
+        {
+            currentPlayerStatus.HealSelf(GetComponent<IGameItem>().GetItemBase().ItemValue + 1); return;
+        }
+
+        currentPlayerStatus.HealSelf(GetComponent<IGameItem>().GetItemBase().ItemValue); return;
     }
 
 
@@ -50,6 +68,5 @@ public class Potion : MonoBehaviour,IGameItem {
     {
         return GameObject.FindObjectOfType<GameLogic>();
     }
-    //TODO Speacialize according to secondary categories
 
 }

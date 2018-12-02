@@ -18,7 +18,7 @@ public class ItemBase: ScriptableObject
     {
         None,
         Damage,
-        DamageOverTime,
+        DamageOverTimePoison,
         Heal,
         ItemShuffle,
         Shield,
