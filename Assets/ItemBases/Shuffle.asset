@@ -11,9 +11,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc30c60744401124cb3856399657b634, type: 3}
   m_Name: Shuffle
   m_EditorClassIdentifier: 
-  Name: Cleanse
-  Description: Remove 1 debuff from yourself
-  ItemWeight: 0
+  Name: Shuffle
+  Description: Shuffles both players' items and redistributes.
+  SecondaryDescription: 
+  ItemWeight: 1
   ItemValue: 1
-  MainType: 1
-  ItemIcon: {fileID: 21300000, guid: 1ca2a167dd3e15342a82a6d9ca55cf2b, type: 3}
+  AnimationTrigger: 
+  MainType: 2
+  SecondaryType: 4
+  ItemIcon: {fileID: 21300000, guid: 800e10506881ea04bbd8340b6a94b7ab, type: 3}

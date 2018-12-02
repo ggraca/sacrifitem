@@ -13,7 +13,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Poison
   Description: Each turn deal 1 damage to your opponent
-  ItemWeight: 0
+  SecondaryDescription: 
+  ItemWeight: 1
   ItemValue: 1
+  AnimationTrigger: 
   MainType: 0
+  SecondaryType: 2
   ItemIcon: {fileID: 21300000, guid: 9a3e41bb3f4b4314db986aa515f4f0f1, type: 3}

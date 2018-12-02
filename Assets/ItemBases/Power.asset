@@ -13,7 +13,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Power
   Description: Your damage and heal items are improved by 1 point
-  ItemWeight: 0
+  SecondaryDescription: 
+  ItemWeight: 1
   ItemValue: 1
+  AnimationTrigger: 
   MainType: 2
+  SecondaryType: 7
   ItemIcon: {fileID: 21300000, guid: 3404aa7c814482f429cd29fb72bf9a7f, type: 3}

@@ -12,8 +12,39 @@ public class Weapon : MonoBehaviour,IGameItem {
     public ItemBase GetItemBase() { return itemBase; }
 
     #region Not Implemented
-   
-    public void UseItem(){}
+    public void EquipItem()
+    {
+
+    }
+
+    public void SacrificeItem()
+    {
+
+    }
+    public void UseItem()
+    {
+        switch(itemBase.SecondaryType)
+        {
+            case ItemBase.SecondaryItemType.Damage: Damage();return;
+            case ItemBase.SecondaryItemType.DamageOverTime: DamageOverTime();return;
+        }
+    }
+
+
+    private void Damage()
+    {
+
+    }
+
+    private void DamageOverTime()
+    {
+
+    }
+
+    private GameLogic GetGameLogic()
+    {
+        return GameObject.FindObjectOfType<GameLogic>();
+    }
     #endregion
 
     //TODO Speacialize according to secondary categories

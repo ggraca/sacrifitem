@@ -14,18 +14,20 @@ public class ItemBase: ScriptableObject
         Spell
      }; //TODO May modified later on
 
-    /*/public enum SecondaryItemType
+   public enum SecondaryItemType
     {
         None,
-        Gun,
-        Melee,
-        Potion,
-        Food,
-        Drink,
-        Structure,
-        Ammo,
-        Trap,
-        Throwable
+        Damage,
+        DamageOverTime,
+        Heal,
+        ItemShuffle,
+        Shield,
+        DebuffRemoval,
+        PowerUp,
+        ExtraSacrifice,
+        BuffRemoval,
+        Steal
+
     }; //TODO May be modified later on*/
 
     // public enum ItemRarity
@@ -50,12 +52,13 @@ public class ItemBase: ScriptableObject
 
     public string Name;
     public string Description;
+    public string SecondaryDescription;
     public int ItemWeight;
     public int ItemValue;
     public string AnimationTrigger;
 
     public MainItemType MainType;
-    // public SecondaryItemType SecondaryType;
+    public SecondaryItemType SecondaryType;
     // public ItemRarity Rarity;
     public Sprite ItemIcon;
 
@@ -71,8 +74,9 @@ public class ItemBase: ScriptableObject
                base.Equals(obj) &&
                Name == @base.Name &&
                Description == @base.Description &&
-               MainType == @base.MainType;// &&
-               //SecondaryType == @base.SecondaryType&&
+               SecondaryDescription == @base.SecondaryDescription &&
+               MainType == @base.MainType &&
+               SecondaryType == @base.SecondaryType; //&&
                //Rarity == @base.Rarity;
     }
 
@@ -161,5 +165,8 @@ public interface IGameItem
     void SetItemBase(ItemBase baseForItem);
     ItemBase GetItemBase();
     void UseItem();
+
+    void EquipItem();
+    void SacrificeItem();
     
 }
