@@ -26,18 +26,37 @@ public class Weapon : MonoBehaviour,IGameItem {
         switch(itemBase.SecondaryType)
         {
             case ItemBase.SecondaryItemType.Damage: Damage();return;
-            case ItemBase.SecondaryItemType.DamageOverTime: DamageOverTime();return;
+            case ItemBase.SecondaryItemType.DamageOverTimePoison: DamageOverTimePoison();return;
         }
     }
 
 
     private void Damage()
     {
+        var gl = GetGameLogic();
+        var currentPlayerStatus = gl.ReceivePlayerStat();
+        var opponentPlayerStatus = gl.ReceiveOponentStat();
 
+        if(currentPlayerStatus.IsPowerUp)
+        {
+            if(opponentPlayerStatus.IsShieldBlocking()) {opponentPlayerStatus.TakeDamage(GetComponent<IGameItem>().GetItemBase().ItemValue + 1); return;}
+        }
+
+        if(opponentPlayerStatus.IsShieldBlocking()) {opponentPlayerStatus.TakeDamage(GetComponent<IGameItem>().GetItemBase().ItemValue);}
     }
 
-    private void DamageOverTime()
+    private void DamageOverTimePoison()
     {
+        var gl = GetGameLogic();
+        var currentPlayerStatus = gl.ReceivePlayerStat();
+        var opponentPlayerStatus = gl.ReceiveOponentStat();
+
+        if(currentPlayerStatus.IsPowerUp)
+        {
+            if(opponentPlayerStatus.IsShieldBlocking()) {opponentPlayerStatus.PoisonPlayer(GetComponent<IGameItem>().GetItemBase().ItemValue + 1); return;}
+        }
+
+        if(opponentPlayerStatus.IsShieldBlocking()) {opponentPlayerStatus.PoisonPlayer(GetComponent<IGameItem>().GetItemBase().ItemValue); return;}
 
     }
 

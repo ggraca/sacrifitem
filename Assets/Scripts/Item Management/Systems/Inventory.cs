@@ -8,7 +8,7 @@ public class Inventory : MonoBehaviour {
     /// <summary>
     /// Used for keeping track of item count in the inventory
     /// </summary>
-    private class InventoryItemCount
+    public class InventoryItemCount
     {
         public ItemBase item { get; set; }
         public int itemCount { get; set; }
@@ -39,7 +39,7 @@ public class Inventory : MonoBehaviour {
     [SerializeField]
     private GameObject InventoryGUIChild;
 
-    private List<InventoryItemCount> ItemList
+    public List<InventoryItemCount> ItemList
     {
         get
         {
@@ -51,6 +51,10 @@ public class Inventory : MonoBehaviour {
             itemList = value;
         }
     }
+
+
+
+
 
 
     /*private void Start()
