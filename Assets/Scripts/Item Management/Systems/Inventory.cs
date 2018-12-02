@@ -52,7 +52,11 @@ public class Inventory : MonoBehaviour {
         }
     }
 
-
+    public void ClearInventory()
+    {
+        itemList.Clear();
+        CurrentWeight = 0;
+    }
 
 
 
