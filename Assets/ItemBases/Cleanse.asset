@@ -15,5 +15,6 @@ MonoBehaviour:
   Description: Remove 1 debuff from yourself
   ItemWeight: 0
   ItemValue: 1
+  AnimationTrigger: 
   MainType: 1
   ItemIcon: {fileID: 21300000, guid: 1ca2a167dd3e15342a82a6d9ca55cf2b, type: 3}
