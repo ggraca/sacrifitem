@@ -12,14 +12,14 @@ public class Weapon : MonoBehaviour,IGameItem {
     public ItemBase GetItemBase() { return itemBase; }
 
     #region Not Implemented
-    public void EquipItem()
+   public void EquipItem()
     {
-
+        GetGameLogic().Equip(GetComponent<IGameItem>());
     }
 
     public void SacrificeItem()
     {
-
+        GetGameLogic().Sacrifice(GetComponent<IGameItem>());
     }
     public void UseItem()
     {

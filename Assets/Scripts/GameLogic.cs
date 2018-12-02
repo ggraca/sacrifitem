@@ -62,7 +62,8 @@ public class GameLogic : MonoBehaviour {
 		int temp = currentPlayer;
 		currentPlayer = opponent;
 		opponent = temp;
-
+		equiped = null;
+		discarded = null;
 		// TODO: check for win condition
 	}
 

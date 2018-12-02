@@ -11,14 +11,14 @@ public class Spell : MonoBehaviour,IGameItem {
       public void SetItemBase(ItemBase baseForItem) { itemBase = baseForItem; }
     public ItemBase GetItemBase() { return itemBase; }
 
-   public void EquipItem()
+    public void EquipItem()
     {
-
+        GetGameLogic().Equip(GetComponent<IGameItem>());
     }
 
     public void SacrificeItem()
     {
-
+        GetGameLogic().Sacrifice(GetComponent<IGameItem>());
     }
 
     public void UseItem()

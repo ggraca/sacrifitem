@@ -14,14 +14,14 @@ public class Potion : MonoBehaviour,IGameItem {
     public ItemBase GetItemBase() { return itemBase; }
     
 
-    public void EquipItem()
+ public void EquipItem()
     {
-
+        GetGameLogic().Equip(GetComponent<IGameItem>());
     }
 
     public void SacrificeItem()
     {
-
+        GetGameLogic().Sacrifice(GetComponent<IGameItem>());
     }
 
 
