@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameLogic : MonoBehaviour {
 
@@ -20,6 +21,9 @@ public class GameLogic : MonoBehaviour {
 	[SerializeField]
 	private  CentralItemManager cim;
 
+	[SerializeField]
+	private GameObject InventoryGUIChild;
+
 	void Start () {
 		playerStat[0] = player1.GetComponent<PlayerStatus>();
 		playerStat[1] = player2.GetComponent<PlayerStatus>();
@@ -31,6 +35,9 @@ public class GameLogic : MonoBehaviour {
 			playerInv[1].AddItemToInventory(cim.getRandomItem());	
 		}
 
+		// First Turn
+		playerInv[0].AddItemToInventory(cim.getRandomItem());
+
 		playerInv[0].SetGUI("BackgroundP1");
 		playerInv[1].SetGUI("BackgroundP2");
 	}
@@ -41,30 +48,38 @@ public class GameLogic : MonoBehaviour {
 	}
 
 	public void Sacrifice(IGameItem item) {
+		if (equiped != null && equiped == item) return;
 		discarded = item;
+		SetGUI(item, "DiscardedSlot1");
 	}
 
 	public void Equip(IGameItem item) {
+		if (discarded != null && discarded == item) return;
 		equiped = item;
+		SetGUI(item, "EquipedSlot");
 	}
 
 	public void EndTurn() {
 		if (discarded == null || equiped == null) return;
 
-		removeFromInv(discarded);
-		removeFromInv(equiped);
+		RemoveFromInv(discarded);
+		RemoveFromInv(equiped);
 
 		equiped.UseItem();
 
 		// TODO: check for win condition
 
+		ClearSlots();
 		ChangeTurnUI();
 		int temp = currentPlayer;
 		currentPlayer = opponent;
 		opponent = temp;
-		equiped = null;
-		discarded = null;
+		
 		// TODO: check for win condition
+
+		// Give a new card to the player
+		playerInv[currentPlayer].AddItemToInventory(cim.getRandomItem());
+		playerInv[currentPlayer].SetGUI("BackgroundP" + (currentPlayer + 1).ToString());
 	}
 
 	void ChangeTurnUI() {
@@ -86,7 +101,40 @@ public class GameLogic : MonoBehaviour {
 		return playerInv[opponent];
 	}
 
-	private void removeFromInv(IGameItem item) {
+	private void RemoveFromInv(IGameItem item) {
 		playerInv[currentPlayer].RemoveItemFromInventory(item.GetItemBase());
+		playerInv[currentPlayer].SetGUI("BackgroundP" + (currentPlayer + 1).ToString());
+	}
+
+	private void SetGUI(IGameItem gi, string parentName) {
+		GameObject parent = GameObject.Find(parentName).gameObject;
+		if (parent.transform.childCount > 2) 
+            Destroy(parent.transform.GetChild(parent.transform.childCount - 1).gameObject);
+
+		GameObject itemEntry = Instantiate(InventoryGUIChild, new Vector3(0, 0, 0), Quaternion.identity, parent.transform) as GameObject;
+        itemEntry.transform.localPosition = new Vector3(0, 0, 0);
+		itemEntry.GetComponent<Image>().sprite = gi.GetItemBase().ItemIcon;
+		itemEntry.GetComponent<SlotEntry>().SetGameLogic(this.gameObject);
+	}
+
+	private void ClearSlots() {
+		ClearSlot("EquipedSlot");
+		ClearSlot("DiscardedSlot1");
+		ClearSlot("DiscardedSlot2");
+		equiped = null;
+		discarded = null;
+	}
+
+	private void ClearSlot(string name) {
+		GameObject parent = GameObject.Find(name).gameObject;
+		if (parent.transform.childCount > 2) 
+            Destroy(parent.transform.GetChild(parent.transform.childCount - 1).gameObject);
+	}
+
+	public void RemoveItem(string slotName) {
+		print(slotName);
+		ClearSlot(slotName);
+		if (slotName == "EquipedSlot") equiped = null;
+		if (slotName == "DiscardedSlot1") discarded = null;
 	}
 }

@@ -205,8 +205,8 @@ public class Inventory : MonoBehaviour {
             Destroy(p.transform.GetChild(i).gameObject);
         }
 
-        float initialX = -250;
-        float initialY = 100;
+        float initialX = -225;
+        float initialY = 90;
         int count = 0;
 
         foreach(var x in itemList)
@@ -217,13 +217,13 @@ public class Inventory : MonoBehaviour {
                 itemEntry.transform.localPosition = new Vector3(initialX, initialY, 0);
 
 
-                initialX += 100;
+                initialX += 90;
 
                 count++;
                 if (count % 6 == 0)
                 {
-                    initialX = -250;
-                    initialY -= 100;
+                    initialX = -225;
+                    initialY -= 90;
                     count = 0;
                 }
 

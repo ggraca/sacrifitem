@@ -28,7 +28,6 @@ public class ItemEntry : MonoBehaviour {
             if(Input.GetKeyDown(KeyCode.Mouse0))
             {
                 GetComponent<IGameItem>().EquipItem();
-                print("Equip");
             }
             if(Input.GetKeyDown(KeyCode.Mouse1))
             {
