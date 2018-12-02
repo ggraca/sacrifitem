@@ -80,8 +80,8 @@ public class Spell : MonoBehaviour,IGameItem {
 
         if(opponentPlayerStatus.IsShieldBlocking()) { return;}
 
-        var firstCount = currentPlayerInventory.ItemList.Count;
-        var secondCount = opponentPlayerInventory.ItemList.Count;
+        var firstCount = 0;
+        var secondCount = 0;
 
         List<ItemBase> items = new List<ItemBase>();
 
@@ -90,20 +90,22 @@ public class Spell : MonoBehaviour,IGameItem {
             for(int i =0; i < x.itemCount ; i++)
             {
                 items.Add(x.item);
+                firstCount++;
             }
         }
 
-        currentPlayerInventory.ItemList.Clear();
+        currentPlayerInventory.ClearInventory();
 
         foreach(var x in opponentPlayerInventory.ItemList)
         {
             for(int i =0; i < x.itemCount ; i++)
             {
                 items.Add(x.item);
+                secondCount++;
             }
         }
 
-        opponentPlayerInventory.ItemList.Clear();
+        opponentPlayerInventory.ClearInventory();
 
         items = ShuffleList(items);
 
@@ -113,21 +115,24 @@ public class Spell : MonoBehaviour,IGameItem {
             {
                 currentPlayerInventory.AddItemToInventory(items[i]);
             }
-            for(int i =((items.Count+1)/2)+1; i < items.Count ; i++)
+            for(int i =((items.Count+1)/2); i < items.Count ; i++)
             {
-                currentPlayerInventory.AddItemToInventory(items[i]);
+                opponentPlayerInventory.AddItemToInventory(items[i]);
             }
 
             return;
         }
 
+        print(firstCount);
+        print(secondCount);
+        print(items.Count);
         for(int i =0; i < firstCount ; i++)
         {
-                currentPlayerInventory.AddItemToInventory(items[i]);
-        }
-        for(int i = firstCount+1; i < items.Count ; i++)
-        {
             currentPlayerInventory.AddItemToInventory(items[i]);
+        }
+        for(int i = firstCount; i < items.Count ; i++)
+        {
+            print(opponentPlayerInventory.AddItemToInventory(items[i]));
         }
     }
 
@@ -162,15 +167,22 @@ public class Spell : MonoBehaviour,IGameItem {
             for(int i =0; i < GetComponent<IGameItem>().GetItemBase().ItemValue + 1 ; i ++)
             {
                 var rn = Random.Range(0,opponentPlayerInventory.ItemList.Count);
-                currentPlayerInventory.AddItemToInventory(opponentPlayerInventory.ItemList[rn].item);
-                opponentPlayerInventory.RemoveItemFromInventory(opponentPlayerInventory.ItemList[rn].item);
+                var item = opponentPlayerInventory.ItemList[rn].item;
+
+                currentPlayerInventory.AddItemToInventory(item);
+                opponentPlayerInventory.RemoveItemFromInventory(item);
             }
             return;
         }
 
-        var rng = Random.Range(0,opponentPlayerInventory.ItemList.Count);
-        currentPlayerInventory.AddItemToInventory(opponentPlayerInventory.ItemList[rng].item);
-        opponentPlayerInventory.RemoveItemFromInventory(opponentPlayerInventory.ItemList[rng].item);
+       for(int i =0; i < GetComponent<IGameItem>().GetItemBase().ItemValue ; i ++)
+        {
+            var rn = Random.Range(0,opponentPlayerInventory.ItemList.Count);
+            var item = opponentPlayerInventory.ItemList[rn].item;
+
+            currentPlayerInventory.AddItemToInventory(item);
+            opponentPlayerInventory.RemoveItemFromInventory(item);
+        }
     }
 
     private GameLogic GetGameLogic()
