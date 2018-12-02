@@ -22,6 +22,8 @@ public class PlayerAnimation : MonoBehaviour {
         }
     }
 
+   
+
     void idle() {
         animator.Play("Player_Idle");
     }
@@ -31,19 +33,17 @@ public class PlayerAnimation : MonoBehaviour {
         animator.Play("Player_Hrz Strike");
     }
 
-    void debuff() {
+    void spell() {
         animator.Play("Player_Vrt Strike");
 
     }
     void guard() {
         animator.Play("Player_Guard");
+        
     }
 
     void dead() {
         animator.Play("Player_KO");
-    }
-    void buff() {
-        animator.Play("Player_Heal");
     }
 
     
