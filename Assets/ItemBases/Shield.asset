@@ -13,7 +13,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Shield
   Description: Block 1 random attack from your opponent
-  ItemWeight: 0
+  SecondaryDescription: 
+  ItemWeight: 1
   ItemValue: 1
+  AnimationTrigger: 
   MainType: 2
+  SecondaryType: 5
   ItemIcon: {fileID: 21300000, guid: 13f7a851495ecf6409a9db00b2e2180f, type: 3}

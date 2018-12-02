@@ -12,13 +12,41 @@ public class ItemEntry : MonoBehaviour {
     [SerializeField]
     float yOffset = 30;
 
+    private bool isMouseOver = false;
+
+
 	// Use this for initialization
 	void Start ()
     {
 		toolBox = GameObject.FindGameObjectWithTag("Toolbox").gameObject;
 	}
 
+    void Update()
+    {
+        if(isMouseOver)
+        {
+            if(Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                GetComponent<IGameItem>().EquipItem();
+            }
+            if(Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                GetComponent<IGameItem>().SacrificeItem();
+            }
+        }
+    }
 
+
+    public void HoverOnMouse()
+    {
+        isMouseOver = true;
+    }
+
+
+     public void HoverOffMouse()
+    {
+        isMouseOver = false;
+    }
 
     public void OpenToolbox()
     {
@@ -30,7 +58,8 @@ public class ItemEntry : MonoBehaviour {
         ItemBase currentBase = GetComponent<IGameItem>().GetItemBase();
 
         toolBox.transform.Find("Toolbox").transform.Find("ItemName").gameObject.GetComponent<Text>().text = currentBase.Name;
-        toolBox.transform.Find("Toolbox").transform.Find("ItemDescription").gameObject.GetComponent<Text>().text = currentBase.Description;
+        toolBox.transform.Find("Toolbox").transform.Find("ItemDescription").gameObject.GetComponent<Text>().text = "<b>Std: </b>" + currentBase.Description;
+        toolBox.transform.Find("Toolbox").transform.Find("SecondDescription").gameObject.GetComponent<Text>().text = "<b>P.Up: </b>" +currentBase.SecondaryDescription;
 
     }
 
@@ -39,5 +68,17 @@ public class ItemEntry : MonoBehaviour {
         toolBox.transform.GetChild(0).gameObject.SetActive(false);
     }
 
+    public void HoverOn()
+    {
+        GetComponent<Image>().color = new Color(255,255,255,120);
+    }
 
+    public void HoverOff()
+    {
+        GetComponent<Image>().color = new Color(255,255,255,255);
+    }
+    public void UseItem()
+    {
+        GetComponent<IGameItem>().UseItem();
+    }
 }
