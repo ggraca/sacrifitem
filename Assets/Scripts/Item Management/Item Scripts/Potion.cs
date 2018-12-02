@@ -41,7 +41,7 @@ public class Potion : MonoBehaviour,IGameItem {
 
         if(currentPlayerStatus.IsPowerUp)
         {
-            //TODO find out
+            currentPlayerStatus.RandomlyRemoveDebuff(); return;
         }
 
         currentPlayerStatus.RandomlyRemoveDebuff(); return;

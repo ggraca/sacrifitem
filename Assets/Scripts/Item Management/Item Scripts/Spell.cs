@@ -144,8 +144,7 @@ public class Spell : MonoBehaviour,IGameItem {
 
         if(currentPlayerStatus.IsPowerUp)
         {
-            //TODO figure out 
-            return;
+            if(!opponentPlayerStatus.IsShieldBlocking()) {opponentPlayerStatus.RandomlyRemoveBuff();}
         }
 
         if(!opponentPlayerStatus.IsShieldBlocking()) {opponentPlayerStatus.RandomlyRemoveBuff();}

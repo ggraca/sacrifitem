@@ -230,7 +230,7 @@ public class PlayerStatus : MonoBehaviour
 	{	
 		if(isPoisoned)
 		{
-			poisonAmount +=poisonAmount;
+			this.poisonValue +=poisonAmount;
 		}
 		else
 		{
@@ -308,6 +308,7 @@ public class PlayerStatus : MonoBehaviour
 	{
 		isShielded = false;
 		shieldBlockPos = startingBlockPos;
+		playerBuffs.Remove(BuffTypes.Shield);
 	}
 
 	public void UpdatePlayerStatus()
