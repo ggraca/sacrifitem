@@ -313,7 +313,7 @@ RectTransform:
   m_GameObject: {fileID: 200676408}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_Children:
   - {fileID: 953881961}
   m_Father: {fileID: 1736279929}
@@ -1271,7 +1271,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -20}
-  m_SizeDelta: {x: 400, y: 400}
+  m_SizeDelta: {x: 400, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1066533207
 MonoBehaviour:
@@ -1304,7 +1304,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
-    m_LineSpacing: 1.5
+    m_LineSpacing: 1.1
   m_Text: 'Berkem Cinar
 
 
@@ -1314,7 +1314,10 @@ MonoBehaviour:
     Angelos Tsolakis
 
 
-    Vassia Vasiladioti'
+    Vassia Vasiladioti
+
+
+    Craig Whittaker  ( kinda )'
 --- !u!222 &1066533208
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1482,7 +1485,7 @@ RectTransform:
   m_GameObject: {fileID: 1153361260}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_Children:
   - {fileID: 1417222428}
   m_Father: {fileID: 1736279929}
@@ -1616,7 +1619,7 @@ RectTransform:
   m_GameObject: {fileID: 1179363211}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_Children:
   - {fileID: 576927889}
   m_Father: {fileID: 1736279929}
@@ -1968,11 +1971,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1417222427}
   m_CullTransparentMesh: 0
---- !u!224 &1528396234 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224239703781124268, guid: e4b4608cfe6d8284eb2c29a3e6b85a5d,
-    type: 2}
-  m_PrefabInternal: {fileID: 1615182371}
 --- !u!1 &1553458528
 GameObject:
   m_ObjectHideFlags: 0
@@ -2138,106 +2136,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1585975492}
   m_CullTransparentMesh: 0
---- !u!1001 &1615182371
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1736279929}
-    m_Modifications:
-    - target: {fileID: 224239703781124268, guid: e4b4608cfe6d8284eb2c29a3e6b85a5d,
-        type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224239703781124268, guid: e4b4608cfe6d8284eb2c29a3e6b85a5d,
-        type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224239703781124268, guid: e4b4608cfe6d8284eb2c29a3e6b85a5d,
-        type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224239703781124268, guid: e4b4608cfe6d8284eb2c29a3e6b85a5d,
-        type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224239703781124268, guid: e4b4608cfe6d8284eb2c29a3e6b85a5d,
-        type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224239703781124268, guid: e4b4608cfe6d8284eb2c29a3e6b85a5d,
-        type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224239703781124268, guid: e4b4608cfe6d8284eb2c29a3e6b85a5d,
-        type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224239703781124268, guid: e4b4608cfe6d8284eb2c29a3e6b85a5d,
-        type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 224239703781124268, guid: e4b4608cfe6d8284eb2c29a3e6b85a5d,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224239703781124268, guid: e4b4608cfe6d8284eb2c29a3e6b85a5d,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224239703781124268, guid: e4b4608cfe6d8284eb2c29a3e6b85a5d,
-        type: 2}
-      propertyPath: m_SizeDelta.x
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 224239703781124268, guid: e4b4608cfe6d8284eb2c29a3e6b85a5d,
-        type: 2}
-      propertyPath: m_SizeDelta.y
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 224239703781124268, guid: e4b4608cfe6d8284eb2c29a3e6b85a5d,
-        type: 2}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224239703781124268, guid: e4b4608cfe6d8284eb2c29a3e6b85a5d,
-        type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224239703781124268, guid: e4b4608cfe6d8284eb2c29a3e6b85a5d,
-        type: 2}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224239703781124268, guid: e4b4608cfe6d8284eb2c29a3e6b85a5d,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224239703781124268, guid: e4b4608cfe6d8284eb2c29a3e6b85a5d,
-        type: 2}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 224239703781124268, guid: e4b4608cfe6d8284eb2c29a3e6b85a5d,
-        type: 2}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e4b4608cfe6d8284eb2c29a3e6b85a5d, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!1 &1616800438
 GameObject:
   m_ObjectHideFlags: 0
@@ -2392,25 +2290,21 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.5
-  m_Text: 'At the beggining of the game each player has 12 items.
-
-
-    Each turn players receive 1 extra item.
-
-
-    In order for you to play an item you will have to sacrifice another one (choose
-    wisely).
-
-
-    Next to the health bars (look at the top of your screen) there is an icon which
-    sacrifices your life if pressed and in exhange you receive an extra item which
-    you can play or sacrifice.
+  m_Text: 'In order for you to play an item you will have to sacrifice another one
+    (choose wisely). You can also choose to sacrifice 2 items for a stronger effect.
 
 
     To choose which item you will use (equip) click on it using the left mouse button.
 
 
-    To choose which item you will sacrifice click on it using the left mouse button.'
+    To choose which item you will sacrifice click on it using the left mouse button.
+
+
+    Each turn players receive 1 extra item (or 2 if they have 0 or less HP).
+
+
+    You may sacrifice some HP in order to receive an extra item (next to the health
+    bars).'
 --- !u!222 &1697610649
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2445,19 +2339,18 @@ RectTransform:
   m_GameObject: {fileID: 1736279928}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children:
   - {fileID: 200676409}
   - {fileID: 1153361261}
   - {fileID: 1179363212}
-  - {fileID: 1528396234}
   m_Father: {fileID: 126917440}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.25, y: 0.2}
-  m_AnchorMax: {x: 0.75, y: 0.8}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 960, y: 648}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1736279930
 MonoBehaviour:
@@ -2505,12 +2398,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 370
+    m_Left: 0
     m_Right: 0
-    m_Top: 50
+    m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
-  m_Spacing: 0
+  m_ChildAlignment: 4
+  m_Spacing: -150
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
