@@ -55,8 +55,7 @@ public class ItemBase: ScriptableObject
     public string SecondaryDescription;
     public int ItemWeight;
     public int ItemValue;
-    public string AnimationTrigger;
-
+    public string AnimationName = null;
     public MainItemType MainType;
     public SecondaryItemType SecondaryType;
     // public ItemRarity Rarity;

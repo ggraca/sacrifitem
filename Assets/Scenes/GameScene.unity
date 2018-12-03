@@ -2591,6 +2591,16 @@ Prefab:
       propertyPath: InventorySize
       value: 18
       objectReference: {fileID: 0}
+    - target: {fileID: 95501807995428000, guid: ddbc49c28cefdb64d9c0448067d00453,
+        type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: a91b682cc1277ba448a59832e62e57bb, type: 2}
+    - target: {fileID: 114271985302526130, guid: ddbc49c28cefdb64d9c0448067d00453,
+        type: 2}
+      propertyPath: player_id
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddbc49c28cefdb64d9c0448067d00453, type: 2}
   m_IsPrefabAsset: 0

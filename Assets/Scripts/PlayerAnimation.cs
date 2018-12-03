@@ -16,36 +16,44 @@ public class PlayerAnimation : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKeyDown("w")) {
-            attack();
+            Attack();
         }
         if (Input.GetKeyDown("s"))
         {
-            idle();
+            Idle();
       
         }
     }
 
    
 
-    void idle() {
+    public void Idle() {
         animator.Play("Player" + player_id.ToString() + "_Idle");
     }
 
-    void attack() {
+    public void Attack() {
         animator.Play("Player" + player_id.ToString() + "_Punch");
         animator.Play("Player" + player_id.ToString() + "_Hrz Strike");
     }
 
-    void spell() {
+    public void Spell() {
         animator.Play("Player" + player_id.ToString() + "_Vrt Strike");
-
     }
-    void guard() {
+
+    public void Buff() {
+        animator.Play("Player" + player_id.ToString() + "_Heal");
+    }
+
+    public void Guard() {
         animator.Play("Player" + player_id.ToString() + "_Guard");
         
     }
 
-    void dead() {
+    public void Steal() {
+        animator.Play("Player" + player_id.ToString() + "_KO");
+    }
+
+    public void Dead() {
         animator.Play("Player" + player_id.ToString() + "_KO");
     }
 

@@ -16,7 +16,8 @@ MonoBehaviour:
   SecondaryDescription: 
   ItemWeight: 1
   ItemValue: 4
-  AnimationTrigger: 
+  AnimationName: Spell
+  SoundName: Spell
   MainType: 1
   SecondaryType: 3
   ItemIcon: {fileID: 21300000, guid: 747671e64cb9dd943b0b8cfb5943eb49, type: 3}

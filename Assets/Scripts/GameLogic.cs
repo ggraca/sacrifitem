@@ -12,6 +12,7 @@ public class GameLogic : MonoBehaviour {
 	private PlayerStatus[] playerStat = new PlayerStatus[2];
 	private Inventory[] playerInv = new Inventory[2];
 	private HealthBar[] playerHB = new HealthBar[2];
+	private PlayerAnimation[] playerAnim = new PlayerAnimation[2];
 	private int currentPlayer = 0, opponent = 1;
 
 	private IGameItem equiped, discarded;
@@ -30,12 +31,17 @@ public class GameLogic : MonoBehaviour {
 	public Sprite[] icons;
 
 	private bool sacrificed = false;
+	
+	[SerializeField]
+	private List<AudioClip> clips;
 
 	void Start () {
 		playerStat[0] = player1.GetComponent<PlayerStatus>();
 		playerStat[1] = player2.GetComponent<PlayerStatus>();
 		playerInv[0] = player1.GetComponent<Inventory>();
 		playerInv[1] = player2.GetComponent<Inventory>();
+		playerAnim[0] = player1.GetComponent<PlayerAnimation>();
+		playerAnim[1] = player2.GetComponent<PlayerAnimation>();
 		playerHB[0] = GameObject.Find("HealthBarPlayer1").gameObject.GetComponent<HealthBar>();
 		playerHB[1] = GameObject.Find("HealthBarPlayer2").gameObject.GetComponent<HealthBar>();
 		disableSacrifices[0] = GameObject.Find("DisableSacrificeP1").gameObject;
@@ -82,6 +88,9 @@ public class GameLogic : MonoBehaviour {
 		playerInv[currentPlayer].SetGUI("BackgroundP" + (currentPlayer + 1).ToString());
 		playerInv[opponent].SetGUI("BackgroundP" + (opponent + 1).ToString());
 
+		playerAnim[currentPlayer].SendMessage(equiped.GetItemBase().AnimationName);
+		PlaySound(equiped.GetItemBase().name);
+
 	
 		// TODO: check for win condition
 
@@ -92,6 +101,7 @@ public class GameLogic : MonoBehaviour {
 
 		UpdateBuffsUI(0);
 		UpdateBuffsUI(1);
+
 
 		// Change Turn
 
@@ -228,4 +238,9 @@ public class GameLogic : MonoBehaviour {
 			currentPos -= 40;
 		}
 	}
+
+	public void PlaySound(string itemName) {
+        var clip = clips.Find(x => x.name.Equals(itemName.ToLower()));
+        MSManager.PlaySound("SoundPlayer", clip);
+    }
 }
