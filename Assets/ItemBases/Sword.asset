@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   Name: Sword
-  Description: Deal 3 damage to the opponent
-  SecondaryDescription: 
+  Description: Deals 3 damage to the opponent
+  SecondaryDescription: Deals 5 damage to the opponent
   ItemWeight: 1
   ItemValue: 3
-  AnimationTrigger: 
+  AnimationName: Attack
   MainType: 0
   SecondaryType: 1
   ItemIcon: {fileID: 21300000, guid: 613d1100592551a45a495470d4edd380, type: 3}

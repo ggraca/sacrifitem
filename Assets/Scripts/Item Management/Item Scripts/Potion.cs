@@ -16,12 +16,12 @@ public class Potion : MonoBehaviour,IGameItem {
 
  public void EquipItem()
     {
-        GetGameLogic().Equip(GetComponent<IGameItem>());
+        GetGameLogic().Equip(this);
     }
 
     public void SacrificeItem()
     {
-        GetGameLogic().Sacrifice(GetComponent<IGameItem>());
+        GetGameLogic().Sacrifice(this);
     }
 
 
@@ -41,7 +41,7 @@ public class Potion : MonoBehaviour,IGameItem {
 
         if(currentPlayerStatus.IsPowerUp)
         {
-            currentPlayerStatus.RandomlyRemoveDebuff(); return;
+            currentPlayerStatus.RandomlyRemoveDebuff(); 
         }
 
         currentPlayerStatus.RandomlyRemoveDebuff(); return;
@@ -56,10 +56,10 @@ public class Potion : MonoBehaviour,IGameItem {
 
         if(currentPlayerStatus.IsPowerUp)
         {
-            currentPlayerStatus.HealSelf(GetComponent<IGameItem>().GetItemBase().ItemValue + 1); return;
+            currentPlayerStatus.HealSelf(this.GetItemBase().ItemValue + 2); return;
         }
 
-        currentPlayerStatus.HealSelf(GetComponent<IGameItem>().GetItemBase().ItemValue); return;
+        currentPlayerStatus.HealSelf(this.GetItemBase().ItemValue); return;
     }
 
 

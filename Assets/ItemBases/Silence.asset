@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Name: Silence
   m_EditorClassIdentifier: 
   Name: Silence
-  Description: Remove 1 buff from your opponent
-  SecondaryDescription: 
+  Description: Your opponent can only sacrifice 1 item
+  SecondaryDescription: Your opponent can only sacrifice 1 item and takes 2 damage
   ItemWeight: 1
   ItemValue: 1
-  AnimationTrigger: 
+  AnimationName: Spell
   MainType: 2
   SecondaryType: 9
-  ItemIcon: {fileID: 21300000, guid: ac720408dca217e4189cea6f49d78d30, type: 3}
+  ItemIcon: {fileID: 21300000, guid: a19c44415d3753640b140848c24c3e17, type: 3}

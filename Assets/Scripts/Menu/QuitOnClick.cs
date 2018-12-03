@@ -12,4 +12,12 @@ public class QuitOnClick : MonoBehaviour
 		Application.Quit ();
 #endif
 	}
+
+	public void Restart() {
+		Application.LoadLevel(Application.loadedLevel);
+	}
+
+	public void Menu() {
+		Application.LoadLevel(0);
+	}
 }

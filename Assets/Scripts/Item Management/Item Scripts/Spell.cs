@@ -8,17 +8,17 @@ public class Spell : MonoBehaviour,IGameItem {
     [SerializeField]
     private ItemBase itemBase;
 
-      public void SetItemBase(ItemBase baseForItem) { itemBase = baseForItem; }
+    public void SetItemBase(ItemBase baseForItem) { itemBase = baseForItem; }
     public ItemBase GetItemBase() { return itemBase; }
 
     public void EquipItem()
     {
-        GetGameLogic().Equip(GetComponent<IGameItem>());
+        GetGameLogic().Equip(this);
     }
 
     public void SacrificeItem()
     {
-        GetGameLogic().Sacrifice(GetComponent<IGameItem>());
+        GetGameLogic().Sacrifice(this);
     }
 
     public void UseItem()
@@ -48,12 +48,20 @@ public class Spell : MonoBehaviour,IGameItem {
             currentPlayerStatus.ShieldBlockPos = 1.0f;
         }
     }
+    
     private void PowerUp()
     {
         var gl = GetGameLogic();
         var currentPlayerStatus = gl.ReceivePlayerStat();
-        
-        currentPlayerStatus.EnablePowerUp();
+
+        if(currentPlayerStatus.IsPowerUp)
+        {
+            currentPlayerStatus.EnableReflect();return;
+        }
+
+        currentPlayerStatus.TakeDamage(2);
+        currentPlayerStatus.EnableReflect();
+
     }
 
     private void ExtraSacrifice()
@@ -64,10 +72,37 @@ public class Spell : MonoBehaviour,IGameItem {
 
         if(currentPlayerStatus.IsPowerUp)
         {
-            //TODO figure out
+            if(!opponentPlayerStatus.DoesReflectionOccur())
+            {
+                var amount = this.GetItemBase().ItemValue+1;
+                opponentPlayerStatus.TakeDamage(amount);
+                currentPlayerStatus.HealSelf(amount);
+                return;
+            }
+            else
+            {
+                var amount = this.GetItemBase().ItemValue+1;
+                currentPlayerStatus.TakeDamage(amount);
+                opponentPlayerStatus.HealSelf(amount);
+                return;
+            }
+           
         }
 
-       if(!opponentPlayerStatus.IsShieldBlocking()) { opponentPlayerStatus.EnableDoubleSacrifice();}
+        if(!opponentPlayerStatus.DoesReflectionOccur())
+        {
+            var amount = this.GetItemBase().ItemValue;
+            opponentPlayerStatus.TakeDamage(amount);
+            currentPlayerStatus.HealSelf(amount);
+            return;
+        }
+        else
+        {
+            var amount = this.GetItemBase().ItemValue;
+            currentPlayerStatus.TakeDamage(amount);
+            opponentPlayerStatus.HealSelf(amount);
+            return;
+        }
     }
 
     private void ItemShuffle()
@@ -122,17 +157,13 @@ public class Spell : MonoBehaviour,IGameItem {
 
             return;
         }
-
-        print(firstCount);
-        print(secondCount);
-        print(items.Count);
         for(int i =0; i < firstCount ; i++)
         {
             currentPlayerInventory.AddItemToInventory(items[i]);
         }
         for(int i = firstCount; i < items.Count ; i++)
         {
-            print(opponentPlayerInventory.AddItemToInventory(items[i]));
+            opponentPlayerInventory.AddItemToInventory(items[i]);
         }
     }
 
@@ -144,10 +175,15 @@ public class Spell : MonoBehaviour,IGameItem {
 
         if(currentPlayerStatus.IsPowerUp)
         {
-            if(!opponentPlayerStatus.IsShieldBlocking()) {opponentPlayerStatus.RandomlyRemoveBuff();}
+            if(!opponentPlayerStatus.IsShieldBlocking()) 
+            {
+                opponentPlayerStatus.EnableSilence();
+                opponentPlayerStatus.TakeDamage(2);
+                return;
+            } 
         }
 
-        if(!opponentPlayerStatus.IsShieldBlocking()) {opponentPlayerStatus.RandomlyRemoveBuff();}
+        if(!opponentPlayerStatus.IsShieldBlocking()) {opponentPlayerStatus.EnableSilence();}
     }
 
     private void Steal()
@@ -162,7 +198,7 @@ public class Spell : MonoBehaviour,IGameItem {
 
         if(currentPlayerStatus.IsPowerUp)
         {
-            for(int i =0; i < GetComponent<IGameItem>().GetItemBase().ItemValue + 1 ; i ++)
+            for(int i =0; i < this.GetItemBase().ItemValue + 1 ; i ++)
             {
                 if(opponentPlayerInventory.ItemList.Count == 0 ){return;}
                 var rn = Random.Range(0,opponentPlayerInventory.ItemList.Count);
@@ -174,7 +210,7 @@ public class Spell : MonoBehaviour,IGameItem {
             return;
         }
 
-       for(int i =0; i < GetComponent<IGameItem>().GetItemBase().ItemValue ; i ++)
+       for(int i =0; i < this.GetItemBase().ItemValue ; i ++)
         {
             if(opponentPlayerInventory.ItemList.Count == 0 ){return;}
             var rn = Random.Range(0,opponentPlayerInventory.ItemList.Count);

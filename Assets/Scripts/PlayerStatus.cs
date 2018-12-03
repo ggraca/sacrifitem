@@ -6,8 +6,8 @@ using UnityEngine;
 public class PlayerStatus : MonoBehaviour 
 {
 	
-	public enum BuffTypes{PowerUp,Shield};
-	public enum DebuffTypes{Poison};
+	public enum BuffTypes{PowerUp,Shield,Reflect};
+	public enum DebuffTypes{Poison,Silence};
 	#region Member Variables Here
 	private bool isPoisoned = false; 
 	private int poisonValue = 0;
@@ -25,6 +25,10 @@ public class PlayerStatus : MonoBehaviour
 	private bool isShielded = false;
 	private float shieldBlockPos =0.3f;
 	private float startingBlockPos = 0.3f;
+
+	private bool isSilenced = false;
+	private bool isReflecting = false;
+	private float reflectPos = 0.55f;
 	
 
 	#endregion
@@ -44,6 +48,10 @@ public class PlayerStatus : MonoBehaviour
 		this.isShielded = false;
 		this.shieldBlockPos = 0.3f;
 		this.startingBlockPos = 0.3f;
+		this.isSilenced = false;
+		this.isReflecting = false;
+		this.reflectPos = 0.55f;
+
 	}
 
 	public PlayerStatus(int maxHealth,float shieldBlock)
@@ -61,7 +69,11 @@ public class PlayerStatus : MonoBehaviour
 		this.isShielded = false;
 		this.shieldBlockPos = shieldBlock;
 		this.startingBlockPos = shieldBlock;
+		this.isSilenced = false;
+		this.isReflecting = false;
+		this.reflectPos = 0.55f;
 	}
+
 
     
     #region Setters and Getters
@@ -221,6 +233,58 @@ public class PlayerStatus : MonoBehaviour
             playerDebuffs = value;
         }
     }
+
+    public bool IsSilenced
+    {
+        get
+        {
+            return isSilenced;
+        }
+
+        set
+        {
+            isSilenced = value;
+        }
+    }
+
+    public bool IsReflecting
+    {
+        get
+        {
+            return isReflecting;
+        }
+
+        set
+        {
+            isReflecting = value;
+        }
+    }
+
+    public float ReflectPos
+    {
+        get
+        {
+            return reflectPos;
+        }
+
+        set
+        {
+            reflectPos = value;
+        }
+    }
+
+    public bool IsReflecting1
+    {
+        get
+        {
+            return isReflecting;
+        }
+
+        set
+        {
+            isReflecting = value;
+        }
+    }
     #endregion
 
 
@@ -234,7 +298,7 @@ public class PlayerStatus : MonoBehaviour
 		}
 		else
 		{
-			playerDebuffs.Add(DebuffTypes.Poison);
+			if(!IsDebuffActive(DebuffTypes.Poison)){playerDebuffs.Add(DebuffTypes.Poison);}
 			isPoisoned = true;
 			poisonValue += poisonAmount;
 		}
@@ -242,15 +306,25 @@ public class PlayerStatus : MonoBehaviour
 	//Removal of the status should be there as well i think
 	public void RemovePoison()
 	{
-		playerDebuffs.Remove(DebuffTypes.Poison);
-		isPoisoned = false;
-		poisonValue = 0;
+
+		if(poisonValue > 1)
+		{
+			poisonValue -= 1;
+		}
+		else
+		{
+			playerDebuffs.Remove(DebuffTypes.Poison);
+			isPoisoned = false;
+			poisonValue = 0;
+	
+		}
 	}
 
 	public void TakeDamage(int damage)
     {
         if(currentPlayerHealth - damage <= 0 )
         {
+			currentPlayerHealth -= damage;
             isDead = true;return;
         }
 
@@ -277,6 +351,18 @@ public class PlayerStatus : MonoBehaviour
 	{
 		isPowerUp = false;
 		playerBuffs.Remove(BuffTypes.PowerUp);
+	}
+
+	public void EnableSilence()
+	{
+		isSilenced = true;
+		if(!IsDebuffActive(DebuffTypes.Silence)){playerDebuffs.Add(DebuffTypes.Silence);}
+	}
+
+	public void DisableSilence()
+	{
+		isSilenced = false;
+		playerDebuffs.Remove(DebuffTypes.Silence);
 	}
 
 	public void EnableDoubleSacrifice()
@@ -311,6 +397,30 @@ public class PlayerStatus : MonoBehaviour
 		playerBuffs.Remove(BuffTypes.Shield);
 	}
 
+
+	public void EnableReflect()
+	{
+		isReflecting = true;
+		if(!IsBuffActive(BuffTypes.Reflect)){playerBuffs.Add(BuffTypes.Reflect);}
+	}
+
+	public void DisableReflect()
+	{
+		isReflecting =false;
+		playerBuffs.Remove(BuffTypes.Reflect);
+	}
+
+	public bool DoesReflectionOccur()
+	{
+		if(IsReflecting && Random.value < reflectPos)
+		{	
+			DisableReflect();
+			return true;	
+		}
+
+		return false;
+	}
+
 	public void UpdatePlayerStatus()
 	{
 		if(isPoisoned)
@@ -318,23 +428,19 @@ public class PlayerStatus : MonoBehaviour
 			TakeDamage(poisonValue);
 		}
 
-		if(IsPowerUp && shouldDisablePowerUp)
+		if(IsPowerUp)
 		{
 			DisablePowerUp();
-			shouldDisablePowerUp = false;
-		}
-		else if(IsPowerUp && ! shouldDisablePowerUp)
-		{
-			shouldDisablePowerUp = true;
-		}
-		else if(!IsPowerUp && shouldDisablePowerUp)
-		{
-			shouldDisablePowerUp = false;
 		}
 
 		if(IsDoubleSacrificeReq)
 		{
 			DisableDoubleSacrifice();
+		}
+
+		if(IsSilenced)
+		{
+			DisableSilence();
 		}
 	}
 

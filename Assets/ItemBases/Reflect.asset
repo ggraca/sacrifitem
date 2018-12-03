@@ -9,14 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc30c60744401124cb3856399657b634, type: 3}
-  m_Name: Power
+  m_Name: Reflect
   m_EditorClassIdentifier: 
-  Name: Power
-  Description: Your damage and heal items are improved by 1 point
-  SecondaryDescription: 
+  Name: Reflect
+  Description: Take 2 damage and have 60% chance to reflect the next attack
+  SecondaryDescription: Have 60% chance to reflect the next attack
   ItemWeight: 1
   ItemValue: 1
-  AnimationTrigger: 
+  AnimationName: Buff
   MainType: 2
   SecondaryType: 7
-  ItemIcon: {fileID: 21300000, guid: 3404aa7c814482f429cd29fb72bf9a7f, type: 3}
+  ItemIcon: {fileID: 21300000, guid: ac71bebfdd51e9040bb7428a76aab801, type: 3}

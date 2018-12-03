@@ -33,7 +33,6 @@ public class PlayerAnimation : MonoBehaviour {
 
     public void Attack() {
         animator.Play("Player" + player_id.ToString() + "_Punch");
-        animator.Play("Player" + player_id.ToString() + "_Hrz Strike");
     }
 
     public void Spell() {
@@ -46,11 +45,10 @@ public class PlayerAnimation : MonoBehaviour {
 
     public void Guard() {
         animator.Play("Player" + player_id.ToString() + "_Guard");
-        
     }
 
     public void Steal() {
-        animator.Play("Player" + player_id.ToString() + "_KO");
+        animator.Play("Player" + player_id.ToString() + "_Steal");
     }
 
     public void Dead() {

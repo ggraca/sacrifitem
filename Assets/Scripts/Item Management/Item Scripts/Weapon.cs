@@ -14,12 +14,12 @@ public class Weapon : MonoBehaviour,IGameItem {
     #region Not Implemented
    public void EquipItem()
     {
-        GetGameLogic().Equip(GetComponent<IGameItem>());
+        GetGameLogic().Equip(this);
     }
 
     public void SacrificeItem()
     {
-        GetGameLogic().Sacrifice(GetComponent<IGameItem>());
+        GetGameLogic().Sacrifice(this);
     }
     public void UseItem()
     {
@@ -39,10 +39,34 @@ public class Weapon : MonoBehaviour,IGameItem {
 
         if(currentPlayerStatus.IsPowerUp)
         {
-            if(!opponentPlayerStatus.IsShieldBlocking()) {opponentPlayerStatus.TakeDamage(GetComponent<IGameItem>().GetItemBase().ItemValue + 1); return;}
+            if(!opponentPlayerStatus.IsShieldBlocking()) 
+            {
+                if(!opponentPlayerStatus.DoesReflectionOccur())
+                {
+                    opponentPlayerStatus.TakeDamage(this.GetItemBase().ItemValue + 2); return;
+                }
+                else
+                {
+                    currentPlayerStatus.TakeDamage(this.GetItemBase().ItemValue + 2);
+                    opponentPlayerStatus.HealSelf(2);
+                    return;
+                }
+            }
         }
 
-        if(!opponentPlayerStatus.IsShieldBlocking()) {opponentPlayerStatus.TakeDamage(GetComponent<IGameItem>().GetItemBase().ItemValue);}
+        if(!opponentPlayerStatus.IsShieldBlocking()) 
+        {
+            if(!opponentPlayerStatus.DoesReflectionOccur())
+            {
+                opponentPlayerStatus.TakeDamage(this.GetItemBase().ItemValue); return;
+            }
+            else
+            {
+                currentPlayerStatus.TakeDamage(this.GetItemBase().ItemValue );
+                opponentPlayerStatus.HealSelf(2);
+                return;
+            }
+        }
     }
 
     private void DamageOverTimePoison()
@@ -53,10 +77,34 @@ public class Weapon : MonoBehaviour,IGameItem {
 
         if(currentPlayerStatus.IsPowerUp)
         {
-            if(!opponentPlayerStatus.IsShieldBlocking()) {opponentPlayerStatus.PoisonPlayer(GetComponent<IGameItem>().GetItemBase().ItemValue + 1); return;}
+            if(!opponentPlayerStatus.IsShieldBlocking()) 
+            {
+                if(!opponentPlayerStatus.DoesReflectionOccur())
+                {
+                   opponentPlayerStatus.PoisonPlayer(this.GetItemBase().ItemValue + 1); return;
+                }
+                else
+                {
+                    currentPlayerStatus.PoisonPlayer(this.GetItemBase().ItemValue + 1);
+                    opponentPlayerStatus.HealSelf(2);
+                    return;
+                }
+            }
         }
 
-        if(!opponentPlayerStatus.IsShieldBlocking()) {opponentPlayerStatus.PoisonPlayer(GetComponent<IGameItem>().GetItemBase().ItemValue); return;}
+        if(!opponentPlayerStatus.IsShieldBlocking()) 
+        {
+            if(!opponentPlayerStatus.DoesReflectionOccur())
+            {   
+                opponentPlayerStatus.PoisonPlayer(this.GetItemBase().ItemValue); return;
+            }
+            else
+            {
+                currentPlayerStatus.PoisonPlayer(this.GetItemBase().ItemValue);
+                opponentPlayerStatus.HealSelf(2);
+                return;
+            }
+        }
 
     }
 

@@ -15,7 +15,7 @@ public class GameLogic : MonoBehaviour {
 	private PlayerAnimation[] playerAnim = new PlayerAnimation[2];
 	private int currentPlayer = 0, opponent = 1;
 
-	private IGameItem equiped, discarded;
+	private IGameItem equiped, discarded, discarded2;
 
 	[SerializeField]
 	private int startingInvSize = 5;
@@ -24,14 +24,17 @@ public class GameLogic : MonoBehaviour {
 	private  CentralItemManager cim;
 
 	[SerializeField]
-	private GameObject InventoryGUIChild, BuffGUIChild;
+	private GameObject SlotGUIEntry, BuffGUIChild;
 
 	private GameObject[] disableSacrifices = new GameObject[2];
 
 	public Sprite[] icons;
 
 	private bool sacrificed = false;
-	
+
+	[SerializeField]
+	private GameObject GameOverCanvas;
+
 	[SerializeField]
 	private List<AudioClip> clips;
 
@@ -67,12 +70,19 @@ public class GameLogic : MonoBehaviour {
 
 	public void Sacrifice(IGameItem item) {
 		if (equiped != null && equiped == item) return;
-		discarded = item;
-		SetGUI(item, "DiscardedSlot1");
+		if (discarded == null) {
+			discarded = item;
+			SetGUI(item, "DiscardedSlot1");
+		} else {
+			if (discarded == item || playerStat[currentPlayer].IsSilenced) return;
+			discarded2 = item;
+			SetGUI(item, "DiscardedSlot2");
+		}
 	}
 
 	public void Equip(IGameItem item) {
 		if (discarded != null && discarded == item) return;
+		if (discarded2 != null && discarded2 == item) return;
 		equiped = item;
 		SetGUI(item, "EquipedSlot");
 	}
@@ -82,7 +92,10 @@ public class GameLogic : MonoBehaviour {
 
 		RemoveFromInv(equiped);
 		RemoveFromInv(discarded);
-
+		if (discarded2 != null) {
+			RemoveFromInv(discarded2);
+			playerStat[currentPlayer].EnablePowerUp();
+		}
 
 		equiped.UseItem();
 		playerInv[currentPlayer].SetGUI("BackgroundP" + (currentPlayer + 1).ToString());
@@ -91,8 +104,8 @@ public class GameLogic : MonoBehaviour {
 		playerAnim[currentPlayer].SendMessage(equiped.GetItemBase().AnimationName);
 		PlaySound(equiped.GetItemBase().name);
 
-	
-		// TODO: check for win condition
+		// End of Attack Validation
+		if (playerStat[0].IsDead || playerStat[1].IsDead) GameOver();
 
 		ClearSlots();
 		playerStat[currentPlayer].UpdatePlayerStatus();
@@ -102,9 +115,10 @@ public class GameLogic : MonoBehaviour {
 		UpdateBuffsUI(0);
 		UpdateBuffsUI(1);
 
-
+		// End of Turn Validation
+		if (playerStat[0].IsDead || playerStat[1].IsDead) GameOver();
+		
 		// Change Turn
-
 		int temp = currentPlayer;
 		currentPlayer = opponent;
 		opponent = temp;
@@ -152,7 +166,7 @@ public class GameLogic : MonoBehaviour {
 		if (parent.transform.childCount > 2) 
             Destroy(parent.transform.GetChild(parent.transform.childCount - 1).gameObject);
 
-		GameObject itemEntry = Instantiate(InventoryGUIChild, new Vector3(0, 0, 0), Quaternion.identity, parent.transform) as GameObject;
+		GameObject itemEntry = Instantiate(SlotGUIEntry, new Vector3(0, 0, 0), Quaternion.identity, parent.transform) as GameObject;
         itemEntry.transform.localPosition = new Vector3(0, 0, 0);
 		itemEntry.GetComponent<Image>().sprite = gi.GetItemBase().ItemIcon;
 		itemEntry.GetComponent<SlotEntry>().SetGameLogic(this.gameObject);
@@ -164,6 +178,7 @@ public class GameLogic : MonoBehaviour {
 		ClearSlot("DiscardedSlot2");
 		equiped = null;
 		discarded = null;
+		discarded2 = null;
 	}
 
 	private void ClearSlot(string name) {
@@ -173,10 +188,10 @@ public class GameLogic : MonoBehaviour {
 	}
 
 	public void RemoveItem(string slotName) {
-		print(slotName);
 		ClearSlot(slotName);
 		if (slotName == "EquipedSlot") equiped = null;
 		if (slotName == "DiscardedSlot1") discarded = null;
+		if (slotName == "DiscardedSlot2") discarded2 = null;
 	}
 
 	public void Sacrifice() {
@@ -190,19 +205,23 @@ public class GameLogic : MonoBehaviour {
 		disableSacrifices[currentPlayer].SetActive(true);
 		
 		sacrificed = true;
+
+		// End of Turn Validation
+		if (playerStat[0].IsDead || playerStat[1].IsDead) GameOver();
 	}
 
 	private void UpdateBuffsUI(int p){
+		GameObject buffEntry;
+
 		GameObject buffs = GameObject.Find("BuffsP" + (p + 1).ToString()).gameObject;
 		for(int i = 0; i < buffs.transform.childCount; i ++)
             Destroy(buffs.transform.GetChild(i).gameObject);
 
 		float currentPos = 0;
-		print(playerStat[p].PlayerBuffs.Count);
 		foreach(var pb in playerStat[p].PlayerBuffs) {
 			Sprite icon;
 			switch (pb) {
-				case PlayerStatus.BuffTypes.PowerUp:
+				case PlayerStatus.BuffTypes.Reflect:
 					icon = icons[0];
 					break;
 				case PlayerStatus.BuffTypes.Shield:
@@ -213,7 +232,7 @@ public class GameLogic : MonoBehaviour {
 					break;
 			}
 
-			var buffEntry = Instantiate(BuffGUIChild,  new Vector3(0, 0, 0), Quaternion.identity, buffs.transform) as GameObject;
+			buffEntry = Instantiate(BuffGUIChild,  new Vector3(0, 0, 0), Quaternion.identity, buffs.transform) as GameObject;
         	buffEntry.transform.localPosition = new Vector3(0, currentPos, 0);
 			buffEntry.GetComponent<Image>().sprite = icon;
 
@@ -222,20 +241,29 @@ public class GameLogic : MonoBehaviour {
 
 		foreach(var pb in playerStat[p].PlayerDebuffs) {
 			Sprite icon;
+
 			switch (pb) {
 				case PlayerStatus.DebuffTypes.Poison:
 					icon = icons[2];
+
+					for(int i = 0 ; i < playerStat[p].PoisonValue; i ++) {
+						buffEntry = Instantiate(BuffGUIChild,  new Vector3(0, 0, 0), Quaternion.identity, buffs.transform) as GameObject;
+						buffEntry.transform.localPosition = new Vector3(0, currentPos, 0);
+						buffEntry.GetComponent<Image>().sprite = icon;
+
+						currentPos -= 40;
+					}
+
 					break;
-				default:
-					icon = icons[2];
+				case PlayerStatus.DebuffTypes.Silence:
+					icon = icons[3];
+					buffEntry = Instantiate(BuffGUIChild,  new Vector3(0, 0, 0), Quaternion.identity, buffs.transform) as GameObject;
+					buffEntry.transform.localPosition = new Vector3(0, currentPos, 0);
+					buffEntry.GetComponent<Image>().sprite = icon;
+
+					currentPos -= 40;
 					break;
 			}
-
-			var buffEntry = Instantiate(BuffGUIChild,  new Vector3(0, 0, 0), Quaternion.identity, buffs.transform) as GameObject;
-        	buffEntry.transform.localPosition = new Vector3(0, currentPos, 0);
-			buffEntry.GetComponent<Image>().sprite = icon;
-
-			currentPos -= 40;
 		}
 	}
 
@@ -243,4 +271,13 @@ public class GameLogic : MonoBehaviour {
         var clip = clips.Find(x => x.name.Equals(itemName.ToLower()));
         MSManager.PlaySound("SoundPlayer", clip);
     }
+
+	private void GameOver() {
+		GameOverCanvas.SetActive(true);
+		
+		int loser = (playerStat[0].IsDead) ? 1 : 2;
+		GameObject.Find("WinnerP" + loser.ToString()).GetComponent<Text>().text = "";
+		
+		playerAnim[loser - 1].SendMessage("Dead");
+	}
 }

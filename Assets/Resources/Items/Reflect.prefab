@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4389381925363378}
   - component: {fileID: 114513232155491024}
   m_Layer: 0
-  m_Name: Sacrifice
+  m_Name: Reflect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,4 +51,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79b05af1b28ce954f838460f80963eb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemBase: {fileID: 11400000, guid: 3a99453648fc9a149b5558ad329adf2e, type: 2}
+  itemBase: {fileID: 11400000, guid: 015e9a0c035bd3e4fad53243262c47e9, type: 2}
