@@ -53,13 +53,13 @@ public class ItemEntry : MonoBehaviour {
         toolBox.transform.GetChild(0).gameObject.SetActive(true);
         Vector3 cameraPos = Input.mousePosition;
 
-        toolBox.transform.position = new Vector3(cameraPos.x + xOffset , cameraPos.y + yOffset, 0.0f);
+        toolBox.transform.position = new Vector3(transform.position.x + xOffset , transform.position.y + yOffset, 0.0f);
 
         ItemBase currentBase = GetComponent<IGameItem>().GetItemBase();
 
         toolBox.transform.Find("Toolbox").transform.Find("ItemName").gameObject.GetComponent<Text>().text = currentBase.Name;
-        toolBox.transform.Find("Toolbox").transform.Find("ItemDescription").gameObject.GetComponent<Text>().text = "<b>Std: </b>" + currentBase.Description;
-        toolBox.transform.Find("Toolbox").transform.Find("SecondDescription").gameObject.GetComponent<Text>().text = "<b>P.Up: </b>" +currentBase.SecondaryDescription;
+        toolBox.transform.Find("Toolbox").transform.Find("ItemDescription").gameObject.GetComponent<Text>().text = "* " + currentBase.Description;
+        toolBox.transform.Find("Toolbox").transform.Find("SecondDescription").gameObject.GetComponent<Text>().text = "** " +currentBase.SecondaryDescription;
 
     }
 

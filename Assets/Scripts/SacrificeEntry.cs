@@ -49,7 +49,7 @@ public class SacrificeEntry : MonoBehaviour {
         toolBox.transform.GetChild(0).gameObject.SetActive(true);
         Vector3 cameraPos = Input.mousePosition;
 
-        toolBox.transform.position = new Vector3(cameraPos.x + xOffset , cameraPos.y + yOffset, 0.0f);
+        toolBox.transform.position = new Vector3(transform.position.x + xOffset , transform.position.y + yOffset, 0.0f);
 
         toolBox.transform.Find("Toolbox").transform.Find("ItemName").gameObject.GetComponent<Text>().text = "Sacrifice";
         toolBox.transform.Find("Toolbox").transform.Find("ItemDescription").gameObject.GetComponent<Text>().text = "Sacrifice 2HP and gain a new item";
